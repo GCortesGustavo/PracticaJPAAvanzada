@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+    <persistence-unit name="PracticaJPAAvanzadaPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <class>practicajpaavanzada.entidades.Base</class>
+        <class>practicajpaavanzada.entidades.Paciente</class>
+        <class>practicajpaavanzada.entidades.Medico</class>
+        <class>practicajpaavanzada.entidades.Consulta</class>
+        <class>practicajpaavanzada.entidades.HistoriaClinica</class>
+        <class>practicajpaavanzada.entidades.Medicamento</class>
+        <class>practicajpaavanzada.entidades.LocalDateConverter</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <!-- ===== OPCION A (por defecto): H2 en memoria, no necesita instalar nada ===== -->
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:clinicadb;DB_CLOSE_DELAY=-1;MODE=LEGACY"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+
+            <!-- ===== OPCION B: MySQL (comentar el bloque H2 de arriba y descomentar este) =====
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/clinicadb?createDatabaseIfNotExist=true&amp;serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            -->
+
+            <!-- Borra y vuelve a crear las tablas en cada ejecucion -->
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+
+            <!-- Cambiar a FINE para ver el SQL que genera JPA -->
+            <property name="eclipselink.logging.level" value="WARNING"/>
+        </properties>
+    </persistence-unit>
+</persistence>
